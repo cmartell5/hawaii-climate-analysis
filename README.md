@@ -1,4 +1,5 @@
 # sqlalchemy-challenge
+
 Climate Analysis in Hawaii
 
 I have decided to treat myself to a long holiday vacation in Honolulu, Hawaii. To help with my trip planning, I decide to do a climate analysis about the area. The following sections outline the steps that I will need to take to accomplish this task.
@@ -76,6 +77,5 @@ For a specified start, calculate TMIN, TAVG, and TMAX for all the dates greater 
 
 For a specified start date and end date, calculate TMIN, TAVG, and TMAX for the dates from the start date to the end date, inclusive.
    
-
 ## Programs used:
 Python, SQLAlchemy ORM queries, Pandas, Matplotlib, VS Code, Jupyter Notebook
