@@ -45,6 +45,8 @@ def welcome():
     f"/api/v1.0/precipitation<br/>" 
     f"/api/v1.0/stations<br/>"
     f"/api/v1.0/tobs<br/>"
+    f"/api/v1.0/temp/<start><br/>"
+    f"/api/v1.0/temp/<start>/<end>"
     
     )
 recent_date = session.query(func.max(measurement.date)).first()[0]
@@ -107,30 +109,63 @@ def tobs():
     
 
 ###### the 'temp' route you will query the data with params in the url and return the data Day 3 Activity 10
-@app.route("/api/v1.0/temp/<start>")
+@app.route("/api/v1.0/temp/<sdate>")
+def startdate(sdate):
+    """Return TMIN, TAVG, TMAX."""
+    session = Session(engine)
+    one_year_tobs = session.query(measurement.date, func.min(measurement.tobs), func.max(measurement.tobs), func.avg(measurement.tobs)).\
+    filter(measurement.date >=sdate).group_by(measurement.date).all()
+       # # Dict with date as the key and prcp as the value
+    # startdate_dict = {}
+    # for data in one_year_tobs:
+    #    startdate_dict[data[0]]={'min':one_year_tobs[1], 'max':one_year_tobs[2], 'avg':one_year_tobs[3] }
+    data_list = []
+    for result in one_year_tobs:
+        row = {}
+        row['Start Date'] = result[0]
+        row['Lowest Temperature'] = float(result[1])
+        row['Highest Temperature'] = float(result[2])
+        row['Average Temperature'] = float(result[3])
+        data_list.append(row)
+             
+    
+    return jsonify(data_list) 
+
+
 @app.route("/api/v1.0/temp/<start>/<end>")
 def stats(start=None, end=None):
     """Return TMIN, TAVG, TMAX."""
     session = Session(engine)
+    one_year_tobs = session.query(measurement.date, func.min(measurement.tobs), func.max(measurement.tobs), func.avg(measurement.tobs)).\
+    filter(measurement.date >=start, measurement.date <=end).group_by(measurement.date).all()
+    data_list = []
+    for result in one_year_tobs:
+            row = {}
+            row['Start Date'] = result[0]
+            row['Lowest Temperature'] = float(result[1])
+            row['Highest Temperature'] = float(result[2])
+            row['Average Temperature'] = float(result[3])
+            data_list.append(row)
 
-    # Select statement
-    # calculate TMIN, TAVG, TMAX with start and stop
-    if end is not None:
-        results = session.query(func.min(measurement.tobs),
-        func.avg(measurement.tobs),
-        func.max(measurement.tobs),
-        ).filter(measurement.date>start, measurement.date<end).all()[0]
-    else:
-        results = session.query(func.min(measurement.tobs),
-        func.avg(measurement.tobs),
-        func.max(measurement.tobs),
-        ).filter(measurement.date>start).all()[0]
-    TMIN = results[0]
-    TAVG = results[1]
-    TMAX = results[2]
+    return jsonify(data_list) 
+#     # Select statement
+#     # calculate TMIN, TAVG, TMAX with start and stop
+#     if end is not None:
+#         results = session.query(func.min(measurement.tobs),
+#         func.avg(measurement.tobs),
+#         func.max(measurement.tobs),
+#         ).filter(measurement.date>start, measurement.date<end).all()[0]
+#     else:
+#         results = session.query(func.min(measurement.tobs),
+#         func.avg(measurement.tobs),
+#         func.max(measurement.tobs),
+#         ).filter(measurement.date>start).all()[0]
+#     TMIN = results[0]
+#     TAVG = results[1]
+#     TMAX = results[2]
 
-    # Unravel results into a 1D array and convert to a list
-    return jsonify([TMIN, TAVG, TMAX])
+#     # Unravel results into a 1D array and convert to a list
+#     return jsonify([TMIN, TAVG, TMAX])
 
 
 if __name__ == "__main__":
