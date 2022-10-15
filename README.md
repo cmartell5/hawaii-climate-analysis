@@ -76,6 +76,5 @@ For a specified start, calculate TMIN, TAVG, and TMAX for all the dates greater 
 
 For a specified start date and end date, calculate TMIN, TAVG, and TMAX for the dates from the start date to the end date, inclusive.
    
-
 ## Programs used:
 Python, SQLAlchemy ORM queries, Pandas, Matplotlib, VS Code, Jupyter Notebook
