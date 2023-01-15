@@ -1,6 +1,4 @@
-# sqlalchemy-challenge
-
-Climate Analysis in Hawaii
+# Climate Analysis in Hawaii
 
 I have decided to treat myself to a long holiday vacation in Honolulu, Hawaii. To help with my trip planning, I decide to do a climate analysis about the area. The following sections outline the steps that I will need to take to accomplish this task.
 
@@ -14,7 +12,7 @@ In this section, I will use Python and SQLAlchemy to do a basic climate analysis
 
   Use the SQLAlchemy automap_base() function to reflect my tables into classes, and then save references to the classes named station and measurement.
 
-  Link Python to the database by creating a SQLAlchemy session.
+  Link Python code to the database by creating a SQLAlchemy session.
 
   Perform a precipitation analysis and then a station analysis by completing the steps in the following two subsections.
 
@@ -77,5 +75,5 @@ For a specified start, calculate TMIN, TAVG, and TMAX for all the dates greater 
 
 For a specified start date and end date, calculate TMIN, TAVG, and TMAX for the dates from the start date to the end date, inclusive.
    
-## Programs used:
-Python, SQLAlchemy ORM queries, Pandas, Matplotlib, VS Code, Jupyter Notebook
+## Programs used
+Python, SQLAlchemy ORM queries, Pandas, Matplotlib, VS Code, Jupyter Notebook, Flask API, JSON
