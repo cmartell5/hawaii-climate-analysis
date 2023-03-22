@@ -2,6 +2,8 @@
 
 I have decided to treat myself to a long holiday vacation in Honolulu, Hawaii. To help with my trip planning, I decide to do a climate analysis about the area. The following sections outline the steps that I will need to take to accomplish this task.
 
+![Honolulu](https://user-images.githubusercontent.com/100399092/227031926-77d14b0b-2d63-4093-9b1b-a79498e78128.jpg)
+
 ## Part 1: Analyze and Explore the Climate Data
 
 In this section, I will use Python and SQLAlchemy to do a basic climate analysis and data exploration of my climate database. Specifically, I wil use SQLAlchemy ORM queries, Pandas, and Matplotlib. To do so, I will complete the following steps:
